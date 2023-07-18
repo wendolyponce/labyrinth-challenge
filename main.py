@@ -11,10 +11,7 @@ laberinto = [['.','.','.','.','.','.','.','.','.'],
              ['.','#','.','.','.','.','.','#','.'],
              ['.','#','.','.','.','.','.','#','.'],]
 
-fila = len(laberinto)
-columna = len(laberinto[0])
-print(fila)
-print(columna)
+
 
 
 #Posición inicial, barra = (x, y, orientación) donde 0 es horizontal y 1 vertical
@@ -31,4 +28,22 @@ def print_laberinto(laberinto):
 
 print_laberinto(laberinto)
 
+
+def coordenada_valida(x, y, laberinto):
+    """
+    Determinar si el movimiento es posible dentro del laberinto
+    Args:
+        x: coordenada x
+        y: coordenada y
+        laberinto: matriz del laberinto
+    Returns:
+        bool: True si es posible, False en caso contrario
+    """
+    fila    = len(laberinto)
+    columna = len(laberinto[0])
+
+    if laberinto[x][y] == '.':
+        resultado = True
+
+    return resultado
 
