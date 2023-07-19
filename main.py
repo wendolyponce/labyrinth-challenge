@@ -20,9 +20,8 @@ labyrinth2 = [['.','.','.','.','.','.','.','.','.'],
               ['.','#','.','.','.','.','.','#','.'],
               ['.','#','.','.','.','.','.','#','.'],]
 
+# Definimos la función print_labyrinth para imprimir el laberinto seguimiento de ruta
 def print_labyrinth(labyrinth, path = ""):
-    
-    Posición inicial (0, 0)
     i = 0
     j = 0
     pos = set()
@@ -37,11 +36,11 @@ def print_labyrinth(labyrinth, path = ""):
         elif move == "D":
             j += 1
         pos.add((i, j))
-    
+
     for j, row in enumerate(labyrinth):
         for i, col in enumerate(row):
                 print(col + ".", end="")
-        print()
+    print()
 
 
 def print_laberinto(laberinto):
