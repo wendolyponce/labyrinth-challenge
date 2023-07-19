@@ -42,12 +42,26 @@ def print_labyrinth(labyrinth, path = ""):
                 print(col + ".", end="")
     print()
 
+def valid(labyrinth, moves):
+    i = 0
+    j = 0
 
-def print_laberinto(laberinto):
-    for fila in laberinto:
-        print("".join(fila))
-
-print_laberinto(laberinto1)
+    for move in moves:
+        if move == "L":
+            i -= 1
+        elif move == "R":
+            i += 1
+        elif move == "U":
+            j -= 1
+        elif move == "D":
+            j += 1
+        
+    if not (0<= i <len (labyrinth[0]) and 0<= j <len (labyrinth)):
+        return False
+    elif (labyrinth[j][i] == "#"):
+        return False
+    
+    return True
 
 def coordenada_valida(x, y, laberinto):
     """
