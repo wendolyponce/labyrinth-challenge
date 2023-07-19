@@ -81,6 +81,31 @@ def coordenada_valida(x, y, laberinto):
 
     return resultado
 
+
+def solution(labyrinth, moves):
+    i = 0
+    j = 0
+
+    for move in moves:
+        if move == "L":
+            i -= 1
+        elif move == "R":
+            i += 1
+        elif move == "U":
+            j -= 1
+        elif move == "D":
+            j += 1
+    
+    a = len(labyrinth[0]) - 1
+    b = len(labyrinth) - 1 
+
+    if i==a and j == b:
+        #print("Movimientos: " + moves)
+        print_labyrinth (labyrinth, moves)
+        return True
+    
+    return False
+
 def movimientos(x, y, orientacion, laberinto):
     """
     posibles_movimientos = [der,izq,arriba,abajo]
