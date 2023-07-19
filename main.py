@@ -22,6 +22,13 @@ labyrinth2 = [['.','.','.','.','.','.','.','.','.'],
 
 # Definimos la función print_labyrinth para imprimir el laberinto seguimiento de ruta
 def print_labyrinth(labyrinth, path = ""):
+    """
+    Imprime el laberinto con la ruta recorrida
+    
+    Args:
+        labyrinth (list): El laberinto representado como una lista de listas
+        path (str): Cadena que contiene la ruta recorrida ("L", "R", "U" y "D"). Por defecto, es una cadena vacía
+    """
     i = 0
     j = 0
     pos = set()
@@ -39,10 +46,21 @@ def print_labyrinth(labyrinth, path = ""):
 
     for j, row in enumerate(labyrinth):
         for i, col in enumerate(row):
-                print(col + ".", end="")
-    print()
+                print(col + ".", end = "")
+        print()
 
+# Definimos la función valid para comprobar si un movimiento es válido dentro del laberinto
 def valid(labyrinth, moves):
+    """
+    Verifica si es un movimiento válido dentro del laberinto
+
+    Args:
+        labyrinth (list): El laberinto representado como una lista de listas
+        moves (str): Cadena que contiene la ruta recorrida ("L", "R", "U" y "D"). Por defecto, es una cadena vacía
+    
+    Returns:
+        bool: True el movimiento es válido, False en caso contrario
+    """
     i = 0
     j = 0
 
@@ -55,34 +73,26 @@ def valid(labyrinth, moves):
             j -= 1
         elif move == "D":
             j += 1
-        
-    if not (0<= i <len (labyrinth[0]) and 0<= j <len (labyrinth)):
+    # Verifica si las coordenadas estan dentro de los límites del laberinto
+    if not (0 <= i < len (labyrinth[0]) and 0 <= j < len (labyrinth)):
         return False
+    # Verifica si la celda es una pared
     elif (labyrinth[j][i] == "#"):
         return False
     
     return True
 
-def coordenada_valida(x, y, laberinto):
-    """
-    Determinar si el movimiento es posible dentro del laberinto
-    Args:
-        x: coordenada x
-        y: coordenada y
-        laberinto: matriz del laberinto
-    Returns:
-        bool: True si es posible, False en caso contrario
-    """
-    fila    = len(laberinto)
-    columna = len(laberinto[0])
-
-    if 0 <= x < fila and 0 <= y < columna and laberinto[x][y] == '.':
-        resultado = True
-
-    return resultado
-
-
 def solution(labyrinth, moves):
+    """
+    Verifica si el recorrido llegó a la esquina inferior derecha
+
+    Args:
+        labyrinth (list): El laberinto representado como una lista de listas
+        path (str): Cadena que contiene la ruta recorrida ("L", "R", "U" y "D"). Por defecto, es una cadena vacía
+    
+    Returns:
+        bool: True si encontro una solución, False en caso contrario
+    """
     i = 0
     j = 0
 
@@ -98,45 +108,35 @@ def solution(labyrinth, moves):
     
     a = len(labyrinth[0]) - 1
     b = len(labyrinth) - 1 
-
-    if i==a and j == b:
+    
+    #Verifica si llegó a la esquina inferior derecha
+    if i == a and j == b:
         #print("Movimientos: " + moves)
         print_labyrinth (labyrinth, moves)
         return True
     
     return False
 
-def movimientos(x, y, orientacion, laberinto):
-    """
-    posibles_movimientos = [der,izq,arriba,abajo]
-    mover der x, y+1 -> 0, 1
-    mover izq x, y-1 -> 0,-1
+# MAIN
 
-    mover arriba x-1, y -> -1,0
-    mover abajo  x+1, y ->  1,0
-    """
+# Utilizamos una cola para realizar la búsqueda en anchura
+nums = queue.Queue()
+nums.put("")
+add = ""
+labyrinth = labyrinth1
 
-    posibles_movimientos = [(0,1),(0,-1),(-1,0),(1,0)]
-    
-    dx, dy = orientacion
+# Realizamos la búsqueda hasta encontrar la solución (esquina inferior derecha del laberinto)
+while not solution(labyrinth,add):
+    add = nums. get()
 
-    for i, j in posibles_movimientos:
-        new_x = x + i
-        new_y = y + j
+    for j in ["L","R","U","D"]:
+        put = add + j
 
-        if (
-            coordenada_valida(x, y - 1, laberinto) and
-            coordenada_valida(x, y, laberinto) and
-            coordenada_valida(x, y + 1, laberinto)
-        ):
+        if valid(labyrinth, put):
+            nums.put(put)
 
-
-
-        #print(i," ", j)
-
-    return 0
-
-movimientos(0, 1, 0, laberinto)
+# Imprimimos la longitud de la ruta
+print(len(add))
 
 
 
